@@ -21,9 +21,7 @@ const Container = styled.div`
 
 const Header = styled.header`
   height: 10vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block flex;
 `;
 
 const Loader = styled.div`
@@ -35,6 +33,7 @@ const Loader = styled.div`
 const Title = styled.h1`
   font-size: 30px;
   color: ${(props) => props.theme.accentColor};
+  text-align: center;
 `;
 
 const Overview = styled.div`
@@ -80,6 +79,12 @@ const Tab = styled.span<{ isActive: boolean }>`
   a {
     display: block;
   }
+`;
+
+const GoBackBtn = styled.span`
+  display: inline-block;
+  padding: 20px 10px 10px 10px;
+  cursor: pointer;
 `;
 
 interface RouteParams {
@@ -179,6 +184,10 @@ function Coin() {
 
   const loading = infoLoading || tickersLoading;
 
+  const goBackClick = () => {
+    window.history.back();
+  };
+
   return (
     <Container>
       <Header>
@@ -193,6 +202,8 @@ function Coin() {
             </title>
           </Helmet>
         </HelmetProvider>
+        {loading ? null : <GoBackBtn onClick={goBackClick}>Go back</GoBackBtn>}
+
         <Title>
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
         </Title>
