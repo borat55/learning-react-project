@@ -202,7 +202,9 @@ function Coin() {
             </title>
           </Helmet>
         </HelmetProvider>
-        {loading ? null : <GoBackBtn onClick={goBackClick}>Go back</GoBackBtn>}
+        {loading ? null : (
+          <GoBackBtn onClick={goBackClick}> &lt; Back</GoBackBtn>
+        )}
 
         <Title>
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
@@ -223,7 +225,7 @@ function Coin() {
             </OverviewItem>
             <OverviewItem>
               <span>Price:</span>
-              <span>${tickersData?.quotes.USD.price}</span>
+              <span>${tickersData?.quotes.USD.price.toFixed(2)}</span>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>
