@@ -39,9 +39,10 @@ const Title = styled.h1`
 const Overview = styled.div`
   display: flex;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${(props) => props.theme.cardColor};
   padding: 10px 20px;
   border-radius: 10px;
+  margin-bottom: 20px;
 `;
 const OverviewItem = styled.div`
   display: flex;
@@ -54,9 +55,7 @@ const OverviewItem = styled.div`
     margin-bottom: 5px;
   }
 `;
-const Description = styled.p`
-  margin: 20px 0px;
-`;
+const Description = styled.p``;
 
 const Tabs = styled.div`
   display: flex;
@@ -71,7 +70,7 @@ const Tab = styled.span<{ isActive: boolean }>`
   text-transform: uppercase;
   font-size: 12px;
   font-weight: 400;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${(props) => props.theme.cardColor};
   padding: 7px 0px;
   border-radius: 10px;
   color: ${(props) =>
@@ -85,6 +84,7 @@ const GoBackBtn = styled.span`
   display: inline-block;
   padding: 20px 10px 10px 10px;
   cursor: pointer;
+  color: ${(props) => props.theme.accentColor};
 `;
 
 interface RouteParams {
@@ -228,7 +228,9 @@ function Coin() {
               <span>${tickersData?.quotes.USD.price.toFixed(2)}</span>
             </OverviewItem>
           </Overview>
-          <Description>{infoData?.description}</Description>
+          <Overview>
+            <Description>{infoData?.description}</Description>
+          </Overview>
           <Overview>
             <OverviewItem>
               <span>Total Suply:</span>
