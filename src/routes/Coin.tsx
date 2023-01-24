@@ -203,7 +203,11 @@ function Coin() {
           </Helmet>
         </HelmetProvider>
         {loading ? null : (
-          <GoBackBtn onClick={goBackClick}> &lt; Back</GoBackBtn>
+          <div>
+            <Link to="/">
+              <GoBackBtn> &lt; Back</GoBackBtn>
+            </Link>
+          </div>
         )}
 
         <Title>
