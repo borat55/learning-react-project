@@ -115,7 +115,11 @@ function Coins() {
       <Header>
         <Title>Coins</Title>
         <div>
-          <ModeBtn onClick={toggleDarkAtom}>{emoji ? "Dark" : "Light"}</ModeBtn>
+          {isLoading ? null : (
+            <ModeBtn onClick={toggleDarkAtom}>
+              {emoji ? "Dark" : "Light"}
+            </ModeBtn>
+          )}
         </div>
       </Header>
 
