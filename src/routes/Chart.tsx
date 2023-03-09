@@ -1,84 +1,58 @@
-import { useQuery } from "react-query";
-import { fetchCoinHistory } from "../api";
-import ApexChart from "react-apexcharts";
-import { useRecoilValue } from "recoil";
-import { isDarkAtom } from "../atoms";
+import { Switch, Route, useRouteMatch, Link } from "react-router-dom";
+import LineChart from "./LineChart";
+import CandleChart from "./CandleChart";
+import styled from "styled-components";
 
+const Tabs = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 25px 0px;
+  gap: 10px;
+`;
+
+const Tab = styled.span<{ isActive: boolean }>`
+  width: 45vw;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 400;
+  background-color: ${(props) => props.theme.cardColor};
+  padding: 7px 0px;
+  border-radius: 10px;
+  color: ${(props) =>
+    props.isActive ? props.theme.accentColor : props.theme.textColor};
+  a {
+    display: block;
+  }
+`;
 interface ChartProps {
   coinId: string;
 }
-interface IHistorial {
-  time_open: string;
-  time_close: number;
-  open: number;
-  high: number;
-  low: number;
-  close: number;
-  volume: number;
-  market_cap: number;
-}
 
 function Chart({ coinId }: ChartProps) {
-  const isDark = useRecoilValue(isDarkAtom);
-  const { isLoading, data } = useQuery<IHistorial[]>(
-    ["ohlcv", coinId],
-    () => fetchCoinHistory(coinId),
-    {
-      refetchInterval: 5000,
-    }
-  );
-  console.log(data);
+  const LineMatch = useRouteMatch("/:coinId/chart/lineChart");
+  const CandleMatch = useRouteMatch("/:coinId/chart/candleChart");
+
   return (
     <div>
-      {isLoading ? (
-        "Loading chart..."
-      ) : (
-        <ApexChart
-          type="line"
-          series={[
-            {
-              name: "Price",
-              data: data?.map((price) => price.close) ?? [],
-            },
-          ]}
-          options={{
-            theme: {
-              mode: isDark ? "dark" : "light",
-            },
-            chart: {
-              height: 300,
-              width: 500,
-            },
-            stroke: {
-              curve: "smooth",
-              width: 3,
-            },
-            grid: {
-              show: false,
-            },
-            xaxis: {
-              labels: { show: false },
-              type: "datetime",
-              categories: data?.map((date) =>
-                new Date(date.time_close * 1000).toUTCString()
-              ),
-            },
-            yaxis: {
-              show: false,
-            },
-            fill: {
-              type: "gradient",
-              gradient: { gradientToColors: ["#7986cb"], stops: [0, 100] },
-            },
-            colors: ["#18ffff"],
-            tooltip: {
-              y: {
-                formatter: (value) => `$${value.toFixed(2)}`,
-              },
-            },
-          }}
-        />
-      )}
+      <Switch>
+        <Route path={`/:${coinId}/chart/linechart`}>
+          <LineChart coinId={coinId} />
+        </Route>
+        <Route path={`/:${coinId}/chart/candlechart`}>
+          <CandleChart coinId={coinId} />
+        </Route>
+      </Switch>
+      <div>
+        <Tabs>
+          <Tab isActive={LineMatch !== null}>
+            <Link to={`/${coinId}/chart/linechart`}>Line Chart</Link>
+          </Tab>
+          <Tab isActive={CandleMatch !== null}>
+            <Link to={`/${coinId}/chart/candlechart`}>Candle Chart</Link>
+          </Tab>
+        </Tabs>
+      </div>
     </div>
   );
 }

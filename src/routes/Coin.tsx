@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 import styled from "styled-components";
 import Chart from "./Chart";
-import Price from "./Price";
 import { useQuery } from "react-query";
 import { fetchCoinInfo, fetchTicker } from "../api";
 import { Helmet, HelmetProvider } from "react-helmet-async";
@@ -184,9 +183,9 @@ function Coin() {
 
   const loading = infoLoading || tickersLoading;
 
-  const goBackClick = () => {
-    window.history.back();
-  };
+  // const goBackClick = () => {
+  //   window.history.back();
+  // };
 
   return (
     <Container>
@@ -256,9 +255,6 @@ function Coin() {
           </Tabs>
 
           <Switch>
-            <Route path={`/:${coinId}/price`}>
-              <Price coinId={coinId} />
-            </Route>
             <Route path={`/:${coinId}/chart`}>
               <Chart coinId={coinId} />
             </Route>

@@ -4,7 +4,7 @@ import ApexChart from "react-apexcharts";
 import { isDarkAtom } from "../atoms";
 import { useRecoilValue } from "recoil";
 
-interface IPriceProps {
+interface ICandleProps {
   coinId: string;
 }
 
@@ -19,7 +19,7 @@ interface IHistorial {
   market_cap: number;
 }
 
-function Price({ coinId }: IPriceProps) {
+function CandleChart({ coinId }: ICandleProps) {
   const isDark = useRecoilValue(isDarkAtom);
   const { isLoading, data: priceInfo } = useQuery<IHistorial[]>(
     ["historialPrice", coinId],
@@ -29,7 +29,7 @@ function Price({ coinId }: IPriceProps) {
   return (
     <div>
       {isLoading ? (
-        "Loading the chart"
+        "Loading candlestick chart..."
       ) : (
         <ApexChart
           type="candlestick"
@@ -81,4 +81,4 @@ function Price({ coinId }: IPriceProps) {
   );
 }
 
-export default Price;
+export default CandleChart;
