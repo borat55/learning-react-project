@@ -12,6 +12,7 @@ import { useQuery } from "react-query";
 import { fetchCoinInfo, fetchTicker } from "../api";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import BtnDarkmode from "../components/BtnDarkmode";
+import Price from "./Price";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -259,6 +260,9 @@ function Coin() {
           <Switch>
             <Route path={`/:${coinId}/chart`}>
               <Chart coinId={coinId} />
+            </Route>
+            <Route path={`/:${coinId}/price`}>
+              <Price coinId={coinId} />
             </Route>
           </Switch>
         </>
