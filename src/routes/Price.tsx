@@ -4,18 +4,17 @@ import { fetchTicker } from "../api";
 
 const Pricetab = styled.div`
   min-width: 150px;
-  height: 150px;
+  height: 110px;
   margin: 10px;
   background-color: ${(props) => props.theme.cardColor};
   color: ${(props) => props.theme.textColor};
-  border: 1px solid #000;
   border-radius: 10px;
   padding: 15px;
 `;
 
 const Percentage = styled.div`
   min-width: 150px;
-  height: 120px;
+  height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
