@@ -63,8 +63,17 @@ function CandleChart({ coinId }: ICandleProps) {
             xaxis: {
               type: "datetime",
             },
+
             yaxis: {
-              labels: { formatter: (value: number) => `$${value.toFixed(0)}` },
+              labels: {
+                formatter: (value: number) => {
+                  if (value < 2) {
+                    return `$${value.toFixed(3)}`;
+                  } else {
+                    return `$${value.toFixed(0)}`;
+                  }
+                },
+              },
               axisBorder: { show: false },
               axisTicks: { show: false },
               tooltip: { enabled: true },
