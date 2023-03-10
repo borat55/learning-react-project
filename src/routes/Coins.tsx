@@ -6,6 +6,7 @@ import { fetchCoins } from "../api";
 import { isDarkAtom } from "../atoms";
 import { useSetRecoilState } from "recoil";
 import { useState } from "react";
+import BtnDarkmode from "../components/BtnDarkmode";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -14,6 +15,7 @@ const Container = styled.div`
 `;
 
 const Header = styled.header`
+  position: relative;
   height: 10vh;
   display: flex;
   justify-content: center;
@@ -51,28 +53,13 @@ const Loader = styled.div`
 const Title = styled.h1`
   font-size: 50px;
   color: ${(props) => props.theme.accentColor};
-  margin-top: 30px;
+  margin: 30px 0;
 `;
 
 const Img = styled.img`
   height: 30px;
   width: 30px;
   margin-right: 10px;
-`;
-
-const ModeBtn = styled.button`
-  height: 35px;
-  width: 85px;
-  border: none;
-  border-radius: 10px;
-  color: ${(props) => props.theme.cardColor};
-  background-color: ${(props) => props.theme.accentColor};
-  font-weight: 600;
-  display: inline;
-  position: relative;
-  top: -40px;
-  left: 195px;
-  cursor: pointer;
 `;
 
 interface CoinInterface {
@@ -98,11 +85,6 @@ function Coins() {
   //   })();
   // }, []);
   const setDarkAtom = useSetRecoilState(isDarkAtom);
-  const toggleDarkAtom = () => {
-    setDarkAtom((prev) => !prev);
-    setEmoji((pre) => !pre);
-  };
-  const [emoji, setEmoji] = useState(false);
   const { isLoading, data } = useQuery<CoinInterface[]>("allCoins", fetchCoins);
 
   return (
@@ -114,13 +96,7 @@ function Coins() {
       </HelmetProvider>
       <Header>
         <Title>Coins</Title>
-        <div>
-          {isLoading ? null : (
-            <ModeBtn onClick={toggleDarkAtom}>
-              {emoji ? "Dark" : "Light"}
-            </ModeBtn>
-          )}
-        </div>
+        <BtnDarkmode />
       </Header>
 
       {isLoading ? (

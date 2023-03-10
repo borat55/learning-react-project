@@ -11,9 +11,7 @@ import Chart from "./Chart";
 import { useQuery } from "react-query";
 import { fetchCoinInfo, fetchTicker } from "../api";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { useSetRecoilState } from "recoil";
-import { useState } from "react";
-import { isDarkAtom } from "../atoms";
+import BtnDarkmode from "../components/BtnDarkmode";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -24,6 +22,7 @@ const Container = styled.div`
 const Header = styled.header`
   height: 10vh;
   display: block flex;
+  position: relative;
 `;
 
 const Loader = styled.div`
@@ -211,10 +210,10 @@ function Coin() {
             </Link>
           </div>
         )}
-
         <Title>
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
         </Title>
+        <BtnDarkmode />
       </Header>
       {loading ? (
         <Loader>Loading...</Loader>
