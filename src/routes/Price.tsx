@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { fetchTicker } from "../api";
 
 const Pricetab = styled.div`
-  min-width: 150px;
-  height: 110px;
-  margin: 10px;
+  min-width: 200px;
+  height: 100px;
+  margin-bottom: 20px;
   background-color: ${(props) => props.theme.cardColor};
   color: ${(props) => props.theme.textColor};
   border-radius: 10px;
@@ -14,7 +14,7 @@ const Pricetab = styled.div`
 
 const Percentage = styled.div`
   min-width: 150px;
-  height: 80px;
+  height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,6 +25,7 @@ const Percentage = styled.div`
 interface IPriceProps {
   coinId: string;
 }
+
 interface ITickersData {
   id: string;
   name: string;
@@ -59,41 +60,54 @@ interface ITickersData {
   };
 }
 function Price({ coinId }: IPriceProps) {
-  const { isLoading, data } = useQuery<ITickersData>(coinId, () =>
-    fetchTicker(coinId)
+  const { isLoading, data } = useQuery<ITickersData>(
+    coinId,
+    () => fetchTicker(coinId),
+    {
+      refetchInterval: 5000,
+    }
   );
+
   return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        alignItems: "center",
-        justifyContent: "space-around",
-        margin: "0 auto",
-      }}
-    >
-      <Pricetab>
-        15m ago :
-        <Percentage> {data?.quotes.USD.percent_change_15m}% </Percentage>
-      </Pricetab>
-      <Pricetab>
-        30m ago :
-        <Percentage>{data?.quotes.USD.percent_change_30m}% </Percentage>
-      </Pricetab>
-      <Pricetab>
-        1h ago : <Percentage>{data?.quotes.USD.percent_change_1h}% </Percentage>
-      </Pricetab>
-      <Pricetab>
-        6h ago : <Percentage>{data?.quotes.USD.percent_change_6h}% </Percentage>
-      </Pricetab>
-      <Pricetab>
-        12h ago :
-        <Percentage>{data?.quotes.USD.percent_change_12h}% </Percentage>
-      </Pricetab>
-      <Pricetab>
-        24h ago :
-        <Percentage>{data?.quotes.USD.percent_change_24h}% </Percentage>
-      </Pricetab>
+    <div>
+      {isLoading ? (
+        "is loading..."
+      ) : (
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            justifyContent: "space-between",
+            margin: "0 auto",
+          }}
+        >
+          <Pricetab>
+            15m ago :
+            <Percentage>{data?.quotes.USD.percent_change_15m}%</Percentage>
+          </Pricetab>
+          <Pricetab>
+            30m ago :
+            <Percentage>{data?.quotes.USD.percent_change_30m}% </Percentage>
+          </Pricetab>
+          <Pricetab>
+            1h ago :
+            <Percentage>{data?.quotes.USD.percent_change_1h}% </Percentage>
+          </Pricetab>
+          <Pricetab>
+            6h ago :
+            <Percentage>{data?.quotes.USD.percent_change_6h}% </Percentage>
+          </Pricetab>
+          <Pricetab>
+            12h ago :
+            <Percentage>{data?.quotes.USD.percent_change_12h}% </Percentage>
+          </Pricetab>
+          <Pricetab>
+            24h ago :
+            <Percentage>{data?.quotes.USD.percent_change_24h}% </Percentage>
+          </Pricetab>
+        </div>
+      )}
     </div>
   );
 }

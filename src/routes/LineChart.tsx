@@ -27,6 +27,7 @@ function LineChart({ coinId }: ILineProps) {
       refetchInterval: 5000,
     }
   );
+  console.log(data);
   return (
     <div>
       {isLoading ? (
@@ -73,7 +74,15 @@ function LineChart({ coinId }: ILineProps) {
             },
             yaxis: {
               labels: {
-                formatter: (value) => `$${value.toFixed(0)}`,
+                formatter: (value: number) => {
+                  if (value < 1) {
+                    return `$${value.toFixed(7)}`;
+                  } else if (value < 2) {
+                    return `$${value.toFixed(4)}`;
+                  } else {
+                    return `$${value.toFixed(0)}`;
+                  }
+                },
               },
             },
             fill: {
@@ -83,7 +92,15 @@ function LineChart({ coinId }: ILineProps) {
             colors: ["#18ffff"],
             tooltip: {
               y: {
-                formatter: (value) => `$${value.toFixed(2)}`,
+                formatter: (value) => {
+                  if (value < 1) {
+                    return `$${value.toFixed(7)}`;
+                  } else if (value < 2) {
+                    return `$${value.toFixed(4)}`;
+                  } else {
+                    return `$${value.toFixed(0)}`;
+                  }
+                },
               },
             },
           }}

@@ -67,8 +67,10 @@ function CandleChart({ coinId }: ICandleProps) {
             yaxis: {
               labels: {
                 formatter: (value: number) => {
-                  if (value < 2) {
-                    return `$${value.toFixed(3)}`;
+                  if (value < 1) {
+                    return `$${value.toFixed(7)}`;
+                  } else if (value < 2) {
+                    return `$${value.toFixed(4)}`;
                   } else {
                     return `$${value.toFixed(0)}`;
                   }
@@ -80,7 +82,15 @@ function CandleChart({ coinId }: ICandleProps) {
             },
             tooltip: {
               y: {
-                formatter: (value) => `$${value.toFixed(2)}`,
+                formatter: (value) => {
+                  if (value < 1) {
+                    return `$${value.toFixed(7)}`;
+                  } else if (value < 2) {
+                    return `$${value.toFixed(4)}`;
+                  } else {
+                    return `$${value.toFixed(0)}`;
+                  }
+                },
               },
             },
           }}
