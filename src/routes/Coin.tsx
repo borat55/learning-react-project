@@ -21,7 +21,6 @@ const Container = styled.div`
 `;
 
 const Header = styled.header`
-  height: 10vh;
   display: block flex;
   position: relative;
 `;
@@ -32,7 +31,15 @@ const Loader = styled.div`
   font-size: 20px;
 `;
 
+const GoBackBtn = styled.span`
+  display: inline-block;
+  padding: 20px 10px 10px 10px;
+  cursor: pointer;
+  color: ${(props) => props.theme.accentColor};
+`;
+
 const Title = styled.h1`
+  margin-bottom: 25px;
   font-size: 30px;
   color: ${(props) => props.theme.accentColor};
   text-align: center;
@@ -80,13 +87,6 @@ const Tab = styled.span<{ isActive: boolean }>`
   a {
     display: block;
   }
-`;
-
-const GoBackBtn = styled.span`
-  display: inline-block;
-  padding: 20px 10px 10px 10px;
-  cursor: pointer;
-  color: ${(props) => props.theme.accentColor};
 `;
 
 interface RouteParams {
@@ -211,11 +211,11 @@ function Coin() {
             </Link>
           </div>
         )}
-        <Title>
-          {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
-        </Title>
         <BtnDarkmode />
       </Header>
+      <Title>
+        {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
+      </Title>
       {loading ? (
         <Loader>Loading...</Loader>
       ) : (

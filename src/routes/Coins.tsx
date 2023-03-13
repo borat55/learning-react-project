@@ -5,7 +5,6 @@ import { useQuery } from "react-query";
 import { fetchCoins } from "../api";
 import { isDarkAtom } from "../atoms";
 import { useSetRecoilState } from "recoil";
-import { useState } from "react";
 import BtnDarkmode from "../components/BtnDarkmode";
 
 const Container = styled.div`
