@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { fetchTicker } from "../api";
 
 const PriceTabRow = styled.div`
-  min-width: 67vw;
+  min-width: 25vw;
   display: flex;
   justify-content: space-between;
   padding: 7px 0;
