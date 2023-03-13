@@ -2,9 +2,17 @@ import { useQuery } from "react-query";
 import styled from "styled-components";
 import { fetchTicker } from "../api";
 
+const PriceTabRow = styled.div`
+  min-width: 67vw;
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 0;
+  gap: 10px;
+`;
+
 const Pricetab = styled.div`
   font-size: 18px;
-  min-width: 200px;
+  width: 35vw;
   height: 100px;
   margin-bottom: 20px;
   background-color: ${(props) => props.theme.cardColor};
@@ -13,12 +21,7 @@ const Pricetab = styled.div`
   padding: 15px;
 `;
 
-interface IPercentage {
-  percentage: number | string;
-}
-
 const Percentage = styled.div<IPercentage>`
-  min-width: 150px;
   height: 70px;
   display: flex;
   justify-content: center;
@@ -32,6 +35,10 @@ const Percentage = styled.div<IPercentage>`
       ? props.theme.textColor
       : props.theme.downwardColor};
 `;
+
+interface IPercentage {
+  percentage: number | string;
+}
 
 interface IPriceProps {
   coinId: string;
@@ -84,51 +91,60 @@ function Price({ coinId }: IPriceProps) {
       {isLoading ? (
         "is loading..."
       ) : (
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            alignItems: "center",
-            justifyContent: "space-between",
-            margin: "0 auto",
-          }}
-        >
-          <Pricetab>
-            15m ago :
-            <Percentage percentage={data?.quotes.USD.percent_change_15m ?? ""}>
-              {data?.quotes.USD.percent_change_15m}%
-            </Percentage>
-          </Pricetab>
-          <Pricetab>
-            30m ago :
-            <Percentage percentage={data?.quotes.USD.percent_change_30m ?? ""}>
-              {data?.quotes.USD.percent_change_30m}%{" "}
-            </Percentage>
-          </Pricetab>
-          <Pricetab>
-            1h ago :
-            <Percentage percentage={data?.quotes.USD.percent_change_1h ?? ""}>
-              {data?.quotes.USD.percent_change_1h}%{" "}
-            </Percentage>
-          </Pricetab>
-          <Pricetab>
-            6h ago :
-            <Percentage percentage={data?.quotes.USD.percent_change_6h ?? ""}>
-              {data?.quotes.USD.percent_change_6h}%{" "}
-            </Percentage>
-          </Pricetab>
-          <Pricetab>
-            12h ago :
-            <Percentage percentage={data?.quotes.USD.percent_change_12h ?? ""}>
-              {data?.quotes.USD.percent_change_12h}%{" "}
-            </Percentage>
-          </Pricetab>
-          <Pricetab>
-            24h ago :
-            <Percentage percentage={data?.quotes.USD.percent_change_24h ?? ""}>
-              {data?.quotes.USD.percent_change_24h}%{" "}
-            </Percentage>
-          </Pricetab>
+        <div>
+          <PriceTabRow>
+            <Pricetab>
+              15m ago :
+              <Percentage
+                percentage={data?.quotes.USD.percent_change_15m ?? ""}
+              >
+                {data?.quotes.USD.percent_change_15m}%
+              </Percentage>
+            </Pricetab>
+
+            <Pricetab>
+              30m ago :
+              <Percentage
+                percentage={data?.quotes.USD.percent_change_30m ?? ""}
+              >
+                {data?.quotes.USD.percent_change_30m}%{" "}
+              </Percentage>
+            </Pricetab>
+          </PriceTabRow>
+          <PriceTabRow>
+            <Pricetab>
+              1h ago :
+              <Percentage percentage={data?.quotes.USD.percent_change_1h ?? ""}>
+                {data?.quotes.USD.percent_change_1h}%{" "}
+              </Percentage>
+            </Pricetab>
+
+            <Pricetab>
+              6h ago :
+              <Percentage percentage={data?.quotes.USD.percent_change_6h ?? ""}>
+                {data?.quotes.USD.percent_change_6h}%{" "}
+              </Percentage>
+            </Pricetab>
+          </PriceTabRow>
+          <PriceTabRow>
+            <Pricetab>
+              12h ago :
+              <Percentage
+                percentage={data?.quotes.USD.percent_change_12h ?? ""}
+              >
+                {data?.quotes.USD.percent_change_12h}%{" "}
+              </Percentage>
+            </Pricetab>
+
+            <Pricetab>
+              24h ago :
+              <Percentage
+                percentage={data?.quotes.USD.percent_change_24h ?? ""}
+              >
+                {data?.quotes.USD.percent_change_24h}%{" "}
+              </Percentage>
+            </Pricetab>
+          </PriceTabRow>
         </div>
       )}
     </div>
