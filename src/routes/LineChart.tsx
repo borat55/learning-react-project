@@ -27,7 +27,7 @@ function LineChart({ coinId }: ILineProps) {
       refetchInterval: 5000,
     }
   );
-  console.log(data);
+
   return (
     <div>
       {isLoading ? (
