@@ -1,6 +1,6 @@
 # 💲 Coin Tracker
 
-
+![coinTracker_frontpage](https://user-images.githubusercontent.com/86196159/228935020-a7c05de1-fd43-4766-991a-6270c75485b3.gif)
 <a href="https://borat55.github.io/coin-tracker">https://borat55.github.io/coin-tracker</a>
 
 ##  Table of contents
