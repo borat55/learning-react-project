@@ -109,7 +109,7 @@ function Coins() {
                 }}
               >
                 <Img
-                  src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`}
+                  src={`https://static.coinpaprika.com/coin/${coin.id}/logo.png`}
                   alt={coin.name}
                 />
                 {coin.name} &rarr;
